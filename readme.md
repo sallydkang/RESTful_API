@@ -31,8 +31,8 @@ app.get('/about', middleware.logger, function(req, res){
 })
 ```
 
-When you separate code into another js file like ```middleware.js```,
-dont forget to add on ```server.js```:
+When you separate code into another js file like `middleware.js`,
+**dont forget** to add on `server.js`:
 
 ```javascript
 var middleware = require('./middleware');
@@ -46,11 +46,11 @@ module.exports = middleware;
 
 ###MORE MIDDLEWARE
 ---
-Install body-parser by running ```$ npm install body-parser --save```
+Install **body-parser** by running `$ npm install body-parser --save`
 
-For body-parser to run, add ```var bodyParser = require('body-parser')``` to ```server.js``` --> this requires the module body-parser
+For body-parser to **run**, add `var bodyParser = require('body-parser')` to `server.js` --> this requires the module body-parser
 
-Run the middleware body-parser globally on ```server.js```
+Run the middleware body-parser globally on `server.js`
 
 ```app.use(bodyParser());```
 
@@ -59,11 +59,11 @@ Run the middleware body-parser globally on ```server.js```
 #Starting Todos
 **CREATE THE ROUTE**
 
-- On ```server.js``` add a route '/todos' 
+- On `server.js` add a route '/todos' 
 - create a variable of objects that stores todo data
 - render json on the /todo page
 
-###**```server.js```:**
+###**`server.js`:**
 
 ```
 app.get('/todos', function(req, res){
@@ -71,21 +71,41 @@ app.get('/todos', function(req, res){
 })
 ```
 
----> ```res.json(todos)``` todos should be the variable of objects
+---> ```res.json(todos)``` todos should be the **variable of objects**
 
 Use **postman** to check if everything is running correctly
 
-###**SINGLE TODO**
+###**SINGLE TODO ROUTE**
 
 Set up routes that shows single object in the todos array:
 
-- write a route that requests ```'/todos/:id'``` with a get response
+- write a route that requests `'/todos/:id'` with a get response
 
-Set a variable that stores the ```:id``` params:
+Set a variable that **stores** the `:id` params:
 
-```var todoId = parseInt(req.params.id); ```
+`var todoId = parseInt(req.params.id); ` (**parseInt** helps converts to an integer)
 
+---> this gives us a way to access the params and **compare** it to the actual todos id (id **key** set in the array).
 
+Write a `forEach` **loop** that matches the params id (`todoId`) with the id of the todos array
 
+- when its matched `res.json` the matched todo
+- when it is not matched `res.status(404)` an error message 
 
+###**POSTING TODO**
 
+Set up the route for posting 
+
+- write a route that **posts** to `'/todos'` 
+
+- Use `req.body` in a variable to access **all** the information of the post
+
+- Set the `req.body` **variable** (`body`) key: `id` to the next id of the array.
+
+```
+body.id = todos[todos.length-1].id+1;
+```
+
+_This grabs the last object of the array by calculating the arrays' **length** and accessing the **key** id_
+
+- **Push** the `body` to the array: ```todos.push(body);```

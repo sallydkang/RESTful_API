@@ -46,6 +46,13 @@ app.get('/todos/:id', function(req, res){
   }
 })
 
+app.post('/todos', function(req, res){
+  var body = req.body;
+  body.id = todos[todos.length-1].id+1;
+  todos.push(body);
+  res.json(todos);
+})
+
 app.get('/about', middleware.logger, function(req, res){
   res.send('<h1> Express About Page</h1>')
 })
