@@ -100,7 +100,7 @@ Set up the route for posting
 
 - Use `req.body` in a variable to access **all** the information of the post
 
-- Set the `req.body` **variable** (`body`) key: `id` to the next id of the array.
+- Set the `req.body` **variable** (`body`) key: `id` to the next id of the array
 
 ```
 body.id = todos[todos.length-1].id+1;
