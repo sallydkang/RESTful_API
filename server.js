@@ -1,8 +1,9 @@
 var express = require('express');
 var app = express();
 var path = require('path'); //path module from node
-var middleware = require('./middleware')
-var bodyParser = require('body-parser')
+var middleware = require('./middleware');
+var bodyParser = require('body-parser');
+var _ = require('lodash');
 var PORT = process.env.PORT || 3000;
 
 //start todo
@@ -33,12 +34,15 @@ app.get('/todos', function(req, res){
 
 app.get('/todos/:id', function(req, res){
   var todoId = parseInt(req.params.id);
-  var matchedTodo;
-  todos.forEach (function(todo){
-    if(todoId === todo.id){
-      matchedTodo = todo;
-    }
-  })
+  var matchedTodo = _.find(todos, {id: todoId}); //using lodash
+//--------without lodash----
+  // var matchedTodo;
+  // todos.forEach (function(todo){
+  //   if(todoId === todo.id){
+  //     matchedTodo = todo;
+  //   }
+  // })
+//--------------------------
   if(matchedTodo){
     res.json(matchedTodo)
   } else {

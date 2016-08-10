@@ -16,12 +16,14 @@ app.listen(3000, function(){
 ```
 
 ##**MIDDLEWARE**
-Set up middleware: create an object of functions that executes a request and response cycle
+Set up middleware: 
+
+- create an object of functions that executes a request and response cycle
 
 First middleware function **requireAuthentication** will run globally
 (always add next() to help the middleware transition to the next function)
 
-second middleware function **logger** is being executed only when the get response for '/about' runs
+Second middleware function **logger** is being executed only when the get response for `'/about'` runs
 
 You can add middleware on the routes like this: 
 
@@ -52,7 +54,7 @@ For body-parser to **run**, add `var bodyParser = require('body-parser')` to `se
 
 Run the middleware body-parser globally on `server.js`
 
-```
+```javascript
 app.use(bodyParser());
 ```
 
@@ -67,7 +69,7 @@ app.use(bodyParser());
 
 ###**`server.js`:**
 
-```
+```javascript
 app.get('/todos', function(req, res){
   res.json(todos);
 })
@@ -104,10 +106,13 @@ Set up the route for posting
 
 - Set the `req.body` **variable** (`body`) key: `id` to the next id of the array
 
-```
+```javascript
 body.id = todos[todos.length-1].id+1;
 ```
 
 _This grabs the last object of the array by calculating the arrays' **length** and accessing the **key** id_
 
 - **Push** the `body` to the array: ```todos.push(body);```
+
+###**USING LODASH**
+
