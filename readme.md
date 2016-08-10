@@ -116,3 +116,18 @@ _This grabs the last object of the array by calculating the arrays' **length** a
 
 ###**USING LODASH**
 
+`npm install lodash --save` 
+
+Refactor the routes for get and post requests
+
+Instead of writing loops and if statements, you can use lodash to refactor those into shorter code
+
+**Examples:**
+
+```javascript
+var matchedTodo = _.find(todos, {id: todoId});
+```
+
+```javascript
+var body = _.pick(req.body, ['description', 'completed']);
+```
