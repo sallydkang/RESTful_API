@@ -1,19 +1,8 @@
 var express = require('express');
 var app = express();
 var path = require('path'); //path module from node
-var PORT = 3000;
-
-//Custom middleware
-var middleware = {
-  requireAuthentication: function(req, res, next){
-    console.log('Request Auth Ran.');
-    next();
-  },
-  logger: function(req, res, next){
-    console.log(req.method + req.originalUrl + " " + new Date().toString());
-    next();
-  }
-}
+var middleware = require('./middleware')
+var PORT = process.env.PORT || 3000;
 
 app.use(middleware.requireAuthentication);
 
