@@ -52,7 +52,9 @@ For body-parser to **run**, add `var bodyParser = require('body-parser')` to `se
 
 Run the middleware body-parser globally on `server.js`
 
-```app.use(bodyParser());```
+```
+app.use(bodyParser());
+```
 
 ---
 
