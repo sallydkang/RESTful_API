@@ -47,7 +47,7 @@ module.exports = middleware;
 ```
 
 ###MORE MIDDLEWARE
----
+-
 Install **body-parser** by running `$ npm install body-parser --save`
 
 For body-parser to **run**, add `var bodyParser = require('body-parser')` to `server.js` --> this requires the module body-parser
@@ -63,11 +63,12 @@ app.use(bodyParser());
 #Starting Todos
 **CREATE THE ROUTE**
 
-- On `server.js` add a route '/todos' 
+- On `server.js` add a route `'/todos'` 
 - create a variable of objects that stores todo data
 - render json on the /todo page
 
 ###**`server.js`:**
+-
 
 ```javascript
 app.get('/todos', function(req, res){
@@ -80,6 +81,7 @@ app.get('/todos', function(req, res){
 Use **postman** to check if everything is running correctly
 
 ###**SINGLE TODO ROUTE**
+-
 
 Set up routes that shows single object in the todos array:
 
@@ -97,6 +99,7 @@ Write a `forEach` **loop** that matches the params id (`todoId`) with the id of 
 - when it is not matched `res.status(404)` an error message 
 
 ###**POSTING TODO**
+-
 
 Set up the route for posting 
 
@@ -115,6 +118,7 @@ _This grabs the last object of the array by calculating the arrays' **length** a
 - **Push** the `body` to the array: ```todos.push(body);```
 
 ###**USING LODASH**
+-
 
 `npm install lodash --save` 
 
@@ -139,11 +143,25 @@ todos = _.without(todos, matchedTodo);
 ```
 _this helps **delete** the `matchedTodo` value in the `todos` array_
 
-###**DELETE TODO**
-
+###**DELETE TODO** 
+-
 Set the route:
 
 - set a delete request to `/todos/:id` to grab one todo
 - get the `req.params.id` and match it with the objects key id
 - when it is not matched show an error
 - if matched take that object out of the array
+
+###**UPDATE TODO**
+-
+
+Set the route:
+
+- set a put request to `'/todos/:id` to grab one todo
+- get the key id and match it to the params id
+- user lodash `_.pick` to grab the body of the request with the key of _'description'_ and _'completed'_
+- create a variable that will store an object
+- if the `req.body` has the right key values add it into the empty object variable
+- then use `_.extend` to swap the values of the object into the array with the same key id
+
+**Always** start with `!` not if statement 

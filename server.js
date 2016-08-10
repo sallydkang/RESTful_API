@@ -75,6 +75,32 @@ app.delete('/todos/:id', function(req, res){
   }
 })
 
+app.put('/todos/:id', function(req, res){
+  var todoId = parseInt(req.params.id);
+  var matchedTodo = _.find(todos, {id: todoId});
+  var body = _.pick(req.body, ['description', 'completed']);
+  var validAttributes = {}
+
+  if(!matchedTodo){
+    return res.status(400).send(400);
+  }
+
+  if (body.hasOwnProperty('completed') && _.isBoolean(body.completed)){
+    validAttributes.completed = body.completed;
+  } else {
+    return res.status(400).send(400);
+  }
+
+  if (body.hasOwnProperty('description') && _.isString(body.description) && body.description.trim().length > 0){
+    validAttributes.description = body.description.trim();
+  } else {
+    return res.status(400).send(400)
+  }
+
+  matchedTodo = _.extend(matchedTodo, validAttributes);
+  res.json(todos);
+})
+
 app.get('/about', middleware.logger, function(req, res){
   res.send('<h1> Express About Page</h1>')
 })
