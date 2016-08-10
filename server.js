@@ -64,6 +64,17 @@ app.post('/todos', function(req, res){
       res.json(todos);
 })
 
+app.delete('/todos/:id', function(req, res){
+  var todoId = parseInt(req.params.id);
+  var matchedTodo = _.find(todos, {id: todoId});
+  if (!matchedTodo){
+    return res.status(400).send(400)
+  } else {
+    todos = _.without(todos, matchedTodo);
+    res.json(todos);
+  }
+})
+
 app.get('/about', middleware.logger, function(req, res){
   res.send('<h1> Express About Page</h1>')
 })

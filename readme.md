@@ -127,7 +127,23 @@ Instead of writing loops and if statements, you can use lodash to refactor those
 ```javascript
 var matchedTodo = _.find(todos, {id: todoId});
 ```
+_this helps find the todos array key id and match it with the variable `todoId`_
 
 ```javascript
 var body = _.pick(req.body, ['description', 'completed']);
 ```
+_this helps `req.body` only grab the key values of description and complete_
+
+```javascript
+todos = _.without(todos, matchedTodo);
+```
+_this helps **delete** the `matchedTodo` value in the `todos` array_
+
+###**DELETE TODO**
+
+Set the route:
+
+- set a delete request to `/todos/:id` to grab one todo
+- get the `req.params.id` and match it with the objects key id
+- when it is not matched show an error
+- if matched take that object out of the array
